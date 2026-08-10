@@ -1,27 +1,10 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
     `java-library`
     kotlin("jvm") version "2.4.0"
     kotlin("kapt") version "2.4.0"
-}
-
-subprojects {
-    apply{
-        plugin("org.jetbrains.kotlin.jvm")
-        plugin("org.jetbrains.kotlin.kapt")
-        plugin("java-library")
-    }
-
-    configure<JavaPluginExtension> {
-        toolchain {
-            languageVersion.set(JavaLanguageVersion.of(21))
-        }
-        sourceCompatibility = JavaVersion.VERSION_21
-        targetCompatibility = JavaVersion.VERSION_21
-    }
-
-    tasks.withType<JavaCompile>().configureEach {
-        options.compilerArgs.addAll(listOf("--release", "21"))
-    }
 }
 
 version = "1.0"
@@ -31,25 +14,10 @@ val isWindows = System.getProperty("os.name").lowercase().contains("windows")
 val sdkRootP: String? = System.getenv("ANDROID_HOME") ?: System.getenv("ANDROID_SDK_ROOT")
 val libsDir = layout.buildDirectory.dir("libs").get().asFile
 
-sourceSets {
-    named("main") {
-        java {
-            srcDir("src") // 追加目录
-        }
-    }
+sourceSets.main{
+    kotlin.srcDirs("src")
 }
 
-java {
-    toolchain {
-        languageVersion.set(JavaLanguageVersion.of(21))
-    }
-    sourceCompatibility = JavaVersion.VERSION_21
-    targetCompatibility = JavaVersion.VERSION_21
-}
-
-tasks.withType<JavaCompile>().configureEach {
-    options.compilerArgs.addAll(listOf("--release", "21"))
-}
 
 val gameJar = gradle.extra["gameJar"].toString()
 dependencies {
@@ -57,14 +25,16 @@ dependencies {
 //    compileOnly("com.github.Anuken.Arc:arc-core:159.5")
 //    compileOnly("com.github.Anuken.Mindustry:core:v159.5")
 }
-
-// force arc version
-configurations.configureEach {
-    resolutionStrategy.eachDependency {
-        if (requested.group == "com.github.Anuken.Arc") {
-            useVersion(mindustryVersion)
-        }
+tasks.withType<KotlinCompile>().configureEach{
+    compilerOptions{
+        jvmTarget.set(JvmTarget.JVM_1_8)
     }
+}
+
+tasks.withType<JavaCompile>().configureEach{
+    sourceCompatibility = "1.8"
+    targetCompatibility = "1.8"
+    options.release.set(8)
 }
 
 tasks.register("jarAndroid") {
