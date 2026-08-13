@@ -1,29 +1,30 @@
-# Mindustry Kotlin Mod Template
-A Kotlin Mindustry mod that works on Android and PC. This is equivalent to the [Java](https://github.com/Anuken/ExampleJavaMod) version, except in Kotlin.
+# Mindustry Kotlin 模组模板
 
-## Building for Desktop Testing
+一个基于 Kotlin 的 Mindustry 模组，支持在 Android 和 PC 上运行。该模板与 [Java 版本](https://github.com/Anuken/ExampleJavaMod) 等效，只是使用 Kotlin 编写。
 
-1. Install JDK 17.
-2. Run `gradlew jar` [1].
-3. Your mod jar will be in the `build/libs` directory. **Only use this version for testing on desktop. It will not work with Android.**
-To build an Android-compatible version, you need the Android SDK. You can either let Github Actions handle this, or set it up yourself. See steps below.
+## 用于桌面测试的构建
 
-## Building through Github Actions
+1. 安装 JDK 17。
+2. 运行 `gradlew jar` [1]。
+3. 你的模组 jar 文件将位于 `build/libs` 目录中。**此版本仅可用于桌面端测试，不适用于 Android。**
+   要构建兼容 Android 的版本，你需要 Android SDK。你可以让 GitHub Actions 代为处理，也可以自行配置。具体步骤见下文。
 
-This repository is set up with Github Actions CI to automatically build the mod for you every commit. This requires a Github repository, for obvious reasons.
-To get a jar file that works for every platform, do the following:
-1. Make a Github repository with your mod name, and upload the contents of this repo to it. Perform any modifications necessary, then commit and push. 
-2. Check the "Actions" tab on your repository page. Select the most recent commit in the list. If it completed successfully, there should be a download link under the "Artifacts" section. 
-3. Click the download link (should be the name of your repo). Import the jar contained within in Mindustry. This version should work both on Android and Desktop.
+## 通过 GitHub Actions 构建
 
-## Building Locally
+本仓库已配置好 GitHub Actions CI，每次提交时都会自动为你构建模组。显然，这需要有一个 GitHub 仓库。
+要获得适用于所有平台的 jar 文件，请执行以下操作：
+1. 创建一个以你的模组名称命名的 GitHub 仓库，并将本仓库的所有内容上传到其中。进行必要的修改，然后提交并推送。
+2. 在仓库页面的 "Actions" 选项卡中，选择列表中最新的提交记录。如果构建成功完成，在 "Artifacts" 部分会有一个下载链接。
+3. 点击下载链接（文件名应为你的仓库名）。将其中包含的 jar 文件导入 Mindustry。此版本应能在 Android 和桌面端正常运行。
 
-Building locally takes more time to set up, but shouldn't be a problem if you've done Android development before.
-1. Download the Android SDK, unzip it and set the `ANDROID_HOME` environment variable to its location.
-2. Make sure you have API level 30 installed, as well as any recent version of build tools (e.g. 30.0.1)
-3. Add a build-tools folder to your PATH. For example, if you have `30.0.1` installed, that would be `$ANDROID_HOME/build-tools/30.0.1`.
-4. Run `gradlew deploy`. If you did everything correctlly, this will create a jar file in the `build/libs` directory that can be run on both Android and desktop. 
+## 本地构建
 
---- 
+本地构建需要更多时间进行配置，但如果你有过 Android 开发经验，应该不会有什么问题。
+1. 下载 Android SDK，解压并将 `ANDROID_HOME` 环境变量指向其位置。
+2. 确保已安装 API 级别 30，以及任意较新版本的构建工具（例如 30.0.1）。
+3. 将 build-tools 目录添加到你的 PATH 中。例如，如果你安装了 `30.0.1` 版本，则路径为 `$ANDROID_HOME/build-tools/30.0.1`。
+4. 运行 `gradlew deploy`。如果所有步骤都正确完成，这将在 `build/libs` 目录中生成一个可在 Android 和桌面上运行的 jar 文件。
 
-*[1]* *On Linux/Mac it's `./gradlew`, but if you're using Linux I assume you know how to run executables properly anyway.*  
+---
+
+*[1]* *在 Linux/Mac 上应使用 `./gradlew`，但如果你在用 Linux，我想你应当知道如何正确运行可执行文件。*

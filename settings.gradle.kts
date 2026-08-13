@@ -3,8 +3,6 @@
 rootProject.name = "KotlinModTemplate"
 
 val mindustryVersion: String = settings.extra["mindustryVersion"].toString()
-val kspVersion: String = settings.extra["kspVersion"].toString()
-val kotlinpoetVersion: String = settings.extra["kotlinpoetVersion"].toString()
 gradle.extra["mindustryVersion"] = mindustryVersion
 gradle.extra["gameJar"] = settings.extra["gameJar"].toString()
 
@@ -46,10 +44,6 @@ dependencyResolutionManagement {
             } else {
                 library("mindustry", "Anuken", "Mindustry").version(mindustryVersion)
             }
-
-            library("ksp-api", "com.google.devtools.ksp", "symbol-processing-api").version(kspVersion)
-            library("kotlinpoet", "com.squareup", "kotlinpoet").version(kotlinpoetVersion)
-            library("kotlinpoet-ksp", "com.squareup", "kotlinpoet-ksp").version(kotlinpoetVersion)
         }
     }
 }

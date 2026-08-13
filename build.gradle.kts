@@ -20,11 +20,13 @@ sourceSets.main{
 
 
 val gameJar = gradle.extra["gameJar"].toString()
+
 dependencies {
     compileOnly(libs.mindustry)
 //    compileOnly("com.github.Anuken.Arc:arc-core:159.5")
 //    compileOnly("com.github.Anuken.Mindustry:core:v159.5")
 }
+
 tasks.withType<KotlinCompile>().configureEach{
     compilerOptions{
         jvmTarget.set(JvmTarget.JVM_1_8)
